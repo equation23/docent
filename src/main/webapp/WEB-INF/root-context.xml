@@ -9,10 +9,10 @@
        http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-<!--    <context:component-scan base-package="org.zerock.sp3.sample"/>-->
 
-    <context:component-scan base-package="org.zerock.sp1.service"/>
-    <context:component-scan base-package="org.zerock.sp1.config"/>
+
+    <context:component-scan base-package="com.docent.sp1.service"/>
+    <context:component-scan base-package="com.docent.sp1.config"/>
 
     <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
@@ -42,6 +42,6 @@
     <tx:annotation-driven></tx:annotation-driven>
 
 
-    <mybatis-spring:scan base-package="org.zerock.sp1.mapper"></mybatis-spring:scan>
+    <mybatis-spring:scan base-package="com.docent.sp1.mapper"></mybatis-spring:scan>
 
 </beans>

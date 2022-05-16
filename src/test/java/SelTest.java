@@ -8,14 +8,12 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.zerock.sp1.mapper.BoardMapper;
+import com.docent.sp1.mapper.BoardMapper;
 
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 @Log4j2

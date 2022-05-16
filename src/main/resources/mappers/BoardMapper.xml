@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.zerock.sp1.mapper.BoardMapper">
+<mapper namespace="com.docent.sp1.mapper.BoardMapper">
 
     <sql id="search">
         <where>
@@ -30,7 +30,7 @@
         insert into tbl_doc (title, image, classify,location,introduce,audio)
         values (#{title},#{image}, #{classify},#{location},#{introduce},#{audio})
     </insert>
-    <select id="selectList" resultType="org.zerock.sp1.domain.Board">
+    <select id="selectList" resultType="com.docent.sp1.domain.Board">
       select bno,title,image,classify,location,introduce,audio,updatedate
       from tbl_doc
         <include refid="search"></include>
@@ -41,7 +41,7 @@
     <delete id="delete">
         delete from tbl_doc where #{bno}
     </delete>
-    <select id="selectOne" resultType="org.zerock.sp1.domain.Board">
+    <select id="selectOne" resultType="com.docent.sp1.domain.Board">
     select * from tbl_doc where bno = #{bno}
 
     </select>

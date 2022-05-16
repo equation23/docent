@@ -7,8 +7,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.zerock.sp1.domain.Board;
-import org.zerock.sp1.mapper.BoardMapper;
+import com.docent.sp1.domain.Board;
+import com.docent.sp1.mapper.BoardMapper;
 
 @Log4j2
 @ExtendWith(SpringExtension.class)

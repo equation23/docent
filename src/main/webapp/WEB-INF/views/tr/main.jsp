@@ -309,13 +309,6 @@
 
                 <!-- Page Heading -->
                 <h1 class="h3 mb-4 text-gray-800">메인</h1>
-                <div class="select">
-                    <select>
-                        <option value="1">이름</option>
-                        <option value="2">지역</option>
-                        <option value="3">설명</option>
-                    </select>
-                </div>
                 <iframe
                         allow="microphone;"
                         width="350"

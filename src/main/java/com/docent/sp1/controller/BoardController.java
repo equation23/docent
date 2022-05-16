@@ -1,19 +1,16 @@
-package org.zerock.sp1.controller;
+package com.docent.sp1.controller;
 
+import com.docent.sp1.dto.BoardDTO;
+import com.docent.sp1.dto.ListDTO;
+import com.docent.sp1.dto.ListResponseDTO;
+import com.docent.sp1.dto.PageMaker;
+import com.docent.sp1.service.FileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.zerock.sp1.dto.BoardDTO;
-import org.zerock.sp1.dto.ListDTO;
-import org.zerock.sp1.dto.ListResponseDTO;
-import org.zerock.sp1.dto.PageMaker;
-import org.zerock.sp1.mapper.FileMapper;
-import org.zerock.sp1.service.BoardService;
-import org.zerock.sp1.service.FileService;
-
-import java.util.List;
+import com.docent.sp1.service.BoardService;
 
 @RequiredArgsConstructor
 @RequestMapping("/tr/")

@@ -1,4 +1,4 @@
-package org.zerock.sp1.controller;
+package com.docent.sp1.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
