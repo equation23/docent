@@ -1,4 +1,4 @@
-package org.zerock.sp1.dto;
+package com.docent.sp1.dto;
 
 import lombok.Getter;
 import lombok.ToString;

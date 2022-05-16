@@ -1,4 +1,4 @@
-package org.zerock.sp1.config;
+package com.docent.sp1.config;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;

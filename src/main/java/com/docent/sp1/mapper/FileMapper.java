@@ -1,6 +1,6 @@
-package org.zerock.sp1.mapper;
+package com.docent.sp1.mapper;
 
-import org.zerock.sp1.domain.ImgFile;
+import com.docent.sp1.domain.ImgFile;
 
 public interface FileMapper {
     void insertImg(ImgFile imgFile);

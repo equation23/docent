@@ -1,4 +1,4 @@
-package org.zerock.sp1.domain;
+package com.docent.sp1.domain;
 
 import lombok.*;
 
