@@ -70,6 +70,10 @@ public class BoardController {
 
         return "redirect:/tr/read/"+bno+listDTO.getLink();
     }
+    @GetMapping("/map")
+    public void myLocation(){
+
+    }
 }
 
 
