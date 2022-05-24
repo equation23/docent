@@ -40,6 +40,12 @@ dependencies {
     implementation 'org.springframework:spring-tx:5.3.18'
     implementation 'org.springframework:spring-webmvc:5.3.18'
 
+    // https://mvnrepository.com/artifact/org.springframework.security/spring-security-core
+    implementation 'org.springframework.security:spring-security-core:5.6.2'
+    implementation 'org.springframework.security:spring-security-config:5.6.2'
+    implementation 'org.springframework.security:spring-security-taglibs:5.6.2'
+    implementation 'org.springframework.security:spring-security-web:5.6.2'
+
     compileOnly 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
@@ -78,6 +84,14 @@ dependencies {
     implementation 'org.aspectj:aspectjweaver:1.9.9.1'
 // https://mvnrepository.com/artifact/net.coobird/thumbnailator
     implementation 'net.coobird:thumbnailator:0.4.17'
+
+
+    implementation group: 'com.google.apis', name: 'google-api-services-dialogflow', version: 'v2-rev124-1.25.0'
+    // https://mvnrepository.com/artifact/com.google.api-client/google-api-client-gson
+    implementation 'com.google.api-client:google-api-client-gson:1.25.0'
+
+
+
 }
 
 test {
