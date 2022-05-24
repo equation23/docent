@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.docent.sp1.mapper.MemberMapper">
+
+    <resultMap id="memberMap" type="com.docent.sp1.domain.DocentMember">
+        <result property="did" column="did"></result>
+        <result property="dpw" column="dpw"></result>
+        <result property="dname" column="dname"></result>
+        <result property="nickname" column="nickname"></result>
+        <collection property="docentAuthList" resultMap="authMap"></collection>
+    </resultMap>
+
+    <resultMap id="authMap" type="com.docent.sp1.domain.DocentAuth">
+        <result property="did" column="did"></result>
+        <result property="roleName" column="roleName"></result>
+
+    </resultMap>
+
+    <select id="selectOne" resultMap="memberMap">
+        select *
+        from tbl_dmember mem inner join tbl_dauth auth
+                                        on mem.did = auth.did
+        where mem.did = #{did}
+    </select>
+
+</mapper>
