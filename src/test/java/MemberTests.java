@@ -1,4 +1,4 @@
-import com.docent.sp1.domain.DocentAuth;
+import com.docent.sp1.domain.DAdmin;
 import com.docent.sp1.domain.DocentMember;
 import com.docent.sp1.mapper.MemberMapper;
 import lombok.extern.log4j.Log4j2;
@@ -24,29 +24,15 @@ public class MemberTests {
     @Test
     public void testInsert() {
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
 
-            DocentMember docentMember = DocentMember.builder()
-                    .did("user"+i)
+            DAdmin dAdmin = DAdmin.builder()
+                    .did("admin"+i)
                     .dpw(passwordEncoder.encode("111"))
-                    .dname("USER"+i)
-                    .nickname("사용자"+i)
+                    .dname("ADMIN"+i)
                     .build();
 
-            mapper.register(docentMember);
-
-            if(i > 80){
-                DocentAuth docentAuth = DocentAuth.builder().did("user"+i).roleName("ADMIN").build();
-
-                mapper.addAuth(docentAuth);
-
-            }
-
-            DocentAuth docentAuth = DocentAuth.builder().did("user"+i).roleName("MEMBER").build();
-
-            mapper.addAuth(docentAuth);
-
-
+            mapper.register(dAdmin);
 
         }//end for
 

@@ -12,8 +12,8 @@ import java.util.List;
 public class DocentMember {
 
     private String did,dpw,dname,nickname;
+    private Integer score;
 
-    private LocalDateTime regDate,updateDate;
+    private LocalDateTime regdate,updateDate;
 
-    private List<DocentAuth> docentAuthList ;
 }

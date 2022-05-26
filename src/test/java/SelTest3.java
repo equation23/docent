@@ -149,14 +149,14 @@ public class SelTest3 {
 
                 boardMapper.insert(board);
 
-                ImgFile imgFile= ImgFile.builder()
-                        .image(saveImg)
-                        .uuid(imguuid)
-                        .savepath(savePath)
-                        .bno(board.getBno())
-                        .build();
-
-                fileMapper.insertImg(imgFile);
+//                ImgFile imgFile= ImgFile.builder()
+//                        .image(saveImg)
+//                        .uuid(imguuid)
+//                        .savepath(savePath)
+//                        .bno(board.getBno())
+//                        .build();
+//
+//                fileMapper.insertImg(imgFile);
                 driver.navigate().back();
             }
         }

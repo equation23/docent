@@ -1,24 +1,28 @@
 package com.docent.sp1.controller;
 
-import com.docent.sp1.dto.BoardDTO;
-import com.docent.sp1.dto.ListDTO;
-import com.docent.sp1.dto.ListResponseDTO;
-import com.docent.sp1.dto.PageMaker;
+import com.docent.sp1.domain.DocentMember;
+import com.docent.sp1.dto.*;
 import com.docent.sp1.service.FileService;
+import com.docent.sp1.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.docent.sp1.service.BoardService;
 
+import java.util.List;
+
 @RequiredArgsConstructor
+@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/tr/")
 @Controller
 @Log4j2
 public class BoardController {
     private final BoardService service;
     private final FileService fileService;
+    private final MemberService memberService;
 
     @GetMapping("/")
     public String basic(){
@@ -73,6 +77,12 @@ public class BoardController {
     @GetMapping("/map")
     public void myLocation(){
 
+    }
+    @GetMapping("/member")
+    public void memberList(ListDTO listDTO , Model model){
+        ListResponseDTO<DocentMember> responseDTO = memberService.memberList(listDTO);
+
+        model.addAttribute("memberDTO",responseDTO.getDtoList());
     }
 }
 

@@ -5,25 +5,19 @@
 
 <mapper namespace="com.docent.sp1.mapper.MemberMapper">
 
-    <resultMap id="memberMap" type="com.docent.sp1.domain.DocentMember">
-        <result property="did" column="did"></result>
-        <result property="dpw" column="dpw"></result>
-        <result property="dname" column="dname"></result>
-        <result property="nickname" column="nickname"></result>
-        <collection property="docentAuthList" resultMap="authMap"></collection>
-    </resultMap>
 
-    <resultMap id="authMap" type="com.docent.sp1.domain.DocentAuth">
-        <result property="did" column="did"></result>
-        <result property="roleName" column="roleName"></result>
 
-    </resultMap>
-
-    <select id="selectOne" resultMap="memberMap">
+    <select id="selectOne" resultType="com.docent.sp1.domain.DAdmin" >
         select *
-        from tbl_dmember mem inner join tbl_dauth auth
-                                        on mem.did = auth.did
-        where mem.did = #{did}
+        from tbl_dadmin
+        where did = #{did}
     </select>
-
+    <select id="memberList" resultType="com.docent.sp1.domain.DocentMember">
+        select did,dpw,dname,nickname,score,regdate,updateDate
+        from tbl_dmember
+        order by did asc
+    </select>
+    <select id="getTotal" resultType="int">
+        select count(did) from tbl_dmember
+    </select>
 </mapper>
