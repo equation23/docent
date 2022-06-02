@@ -49,7 +49,7 @@
     select count(bno) from tbl_doc
         <include refid="search"></include>
     </select>
-<!--    <update id="update">-->
-<!--        update tbl_doc set title =#{title}, content = #{content}, updateDate = now() where bno =#{bno}-->
-<!--    </update>-->
+    <update id="update">
+        update tbl_doc set title =#{title}, introduce = #{introduce},classify = #{classify},updateDate = now() where bno =#{bno}
+    </update>
 </mapper>

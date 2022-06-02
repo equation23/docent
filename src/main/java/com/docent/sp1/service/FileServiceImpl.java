@@ -15,9 +15,12 @@ public class FileServiceImpl implements FileService{
     private final ModelMapper modelMapper;
 
     @Override
-    public ImageFileDTO selectImg(Integer bno) {
-        ImgFile imgFile = fileMapper.getImg(bno);
-        ImageFileDTO imageFileDTO=modelMapper.map(imgFile,ImageFileDTO.class);
-        return  imageFileDTO;
+    public void insert(ImageFileDTO imageFileDTO) {
+
+
+        ImgFile imgFile=modelMapper.map(imageFileDTO,ImgFile.class);
+        fileMapper.insertBoardImg(imgFile);
     }
+
+
 }

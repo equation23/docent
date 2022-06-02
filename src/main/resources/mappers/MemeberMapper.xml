@@ -5,8 +5,6 @@
 
 <mapper namespace="com.docent.sp1.mapper.MemberMapper">
 
-
-
     <select id="selectOne" resultType="com.docent.sp1.domain.DAdmin" >
         select *
         from tbl_dadmin

@@ -409,6 +409,7 @@
 </div>
 
 <!-- Bootstrap core JavaScript-->
+
 <script src="https://kit.fontawesome.com/e4c9df973b.js" crossorigin="anonymous"></script>
 <script src="http://106.241.252.54:8088/vendor/jquery/jquery.min.js"></script>
 <script src="http://106.241.252.54:8088/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -425,7 +426,6 @@
 
 <!-- Page level custom scripts -->
 <script src="http://106.241.252.54:8088/js/demo/datatables-demo.js"></script>
-
 </body>
 
 </html>

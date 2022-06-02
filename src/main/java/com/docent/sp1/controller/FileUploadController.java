@@ -41,6 +41,7 @@ public class FileUploadController {
             return ResponseEntity.status(404).build();
         }
     }
+
     @GetMapping("/audio")
     public ResponseEntity<byte[]> audioFile(String fileName) {
         File targetFileAudio = new File("C:\\ProjectFiles\\audio\\" + fileName);
@@ -59,24 +60,5 @@ public class FileUploadController {
         }
 
     }
-
-
-    @PostMapping("/upload1")
-    @ResponseBody
-    public void upload1(MultipartFile[] files) {
-//        files
-//        String originalFileName = file.getOriginalFilename();
-//        String thumbFileName = "C:\\ProjectFiles\\image"+"\\s_"+saveName;
-//        File thumbFile = new File("C:\\upload\\" +thumbFileName);
-//
-//        try {
-//            Thumbnails.of(saveFile)
-//                    .size(200,200)
-//                    .toFile(thumbFile);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-    }
 }
+

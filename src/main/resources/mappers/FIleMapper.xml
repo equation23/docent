@@ -4,12 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.docent.sp1.mapper.FileMapper">
 
+
     <insert id="insertImg">
-        insert into tbl_imgfile (uuid,image,savepath,bno)
-        values (#{uuid}, #{image},#{savepath},#{bno})
+        insert into tbl_imgfile (uuid,fileName,savePath,img,bno)
+        values (#{uuid}, #{fileName},#{savePath},#{img},last_insert_id())
+    </insert>
+
+    <insert id="insertBoardImg">
+        insert into tbl_docimg (uuid,fileName,savePath,bno)
+        values (#{uuid}, #{fileName},#{savePath},last_insert_id())
     </insert>
 
     <select id="getImg" resultType="com.docent.sp1.domain.ImgFile">
-        select * from tbl_board where bno = #{bno}
+        select * from tbl_imgfile where bno = #{bno}
+    </select>
+
+    <select id="getBoardImg" resultType="com.docent.sp1.domain.ImgFile">
+        select * from tbl_docimg where bno = #{bno}
     </select>
 </mapper>

@@ -40,10 +40,10 @@ public class SelTest3 {
 
         ChromeOptions options = new ChromeOptions();
         // 브라우저 보이지 않기
-        options.addArguments("headless");
+//        options.addArguments("headless");
 
         WebDriver driver = new ChromeDriver(options);
-        for (int i = 1; i < 12; i++) {
+        for (int i = 12; i < 15; i++) {
             driver.get(String.format("https://www.heritage.go.kr/heri/cul/culSelectViewList.do?gbn=2&pageNo=1_1_1_1&culPageNo=%d&ccbaCndt=&searchCondition=&region=1&s_kdcdArr=11&s_kdcdArr=12&s_kdcdArr=13&s_kdcdArr=15&s_ctcdArr=00&ccbaPcd1Arr=01&ccbaPcd1Arr=03&ccbaPcd1Arr=05&ccbaPcd1Arr=07&ccbaPcd1Arr=09&ccbaPcd1Arr=10&ccbaPcd1Arr=11&ccbaPcd1Arr=12&ccbaPcd1Arr=13&ccbaPcd1Arr=15&ccbaPcd1Arr=20&ccbaPcd1Arr=30&ccbaPcd1Arr=40&ccbaPcd1Arr=45&ccbaPcd1Arr=50&stCcbaAsdt=&endCcbaAsdt=&ccbaGcodeArr=00&sortType=&sortOrd=", i));
             for (int j = 1; j < 13; j++) {
                 Thread.sleep(1000);
@@ -115,7 +115,7 @@ public class SelTest3 {
 
                 //오디오
                 String audio = (driver.findElement(By.xpath("//*[@id=\"audiofile\"]/source")).getAttribute("src"));
-                System.out.println(audio);
+
                 URL audiourl = new URL(audio);
 
                 InputStream inputStream = audiourl.openStream();
@@ -149,14 +149,14 @@ public class SelTest3 {
 
                 boardMapper.insert(board);
 
-//                ImgFile imgFile= ImgFile.builder()
-//                        .image(saveImg)
-//                        .uuid(imguuid)
-//                        .savepath(savePath)
-//                        .bno(board.getBno())
-//                        .build();
-//
-//                fileMapper.insertImg(imgFile);
+                ImgFile imgFile= ImgFile.builder()
+                        .fileName(saveImg)
+                        .uuid(imguuid)
+                        .savePath(savePath)
+                        .bno(board.getBno())
+                        .build();
+
+                fileMapper.insertBoardImg(imgFile);
                 driver.navigate().back();
             }
         }

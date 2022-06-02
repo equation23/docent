@@ -10,7 +10,7 @@ import lombok.*;
 public class ImgFile {
     private String uuid;
     private Integer bno;
-    private String image;
-    private String savepath;
-
+    private String fileName;
+    private String savePath;
+    private boolean img;
 }

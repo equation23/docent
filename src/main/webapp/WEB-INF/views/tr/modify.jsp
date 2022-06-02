@@ -321,7 +321,11 @@
                 <div>
                     <textarea  name="introduce" style="width: 1262px; height: 400px; flex: auto"><c:out value="${dto.introduce}"/></textarea>
                 </div>
-
+                    <div>
+                        <h5>이미지 수정</h5>
+                        <input type="file" name="upload" class="uploadFile">
+                        <button class="uploadBtn">UPLOAD</button>
+                    </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <button class="btn btn-primary me-md-2 modifyBtn" >수정</button>
                 </div>
@@ -374,6 +378,7 @@
     </div>
 </div>
 <script>
+
     // document.querySelector('.modifyBtn').addEventListener("click",(e)=>{
     //
     //     console.log(document.querySelector('.title').value)
