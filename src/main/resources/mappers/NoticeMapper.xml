@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.docent.sp1.mapper.NoticeMapper">
+    <sql id="search">
+        <where>
+            <if test="keyword != null">
+                <foreach collection="types" item="item" separator=" OR " open="(" close=")">
+                    <if test='item == "t"'>
+                        dname like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test='item == "c"'>
+                        title like concat('%', #{keyword}, '%')
+                    </if>
+                    <if test='item == "w"'>
+                        content like concat('%', #{keyword}, '%')
+                    </if>
+                </foreach>
+            </if>
+        </where>
+    </sql>
+
+    <insert id="noticeInsert">
+        <selectKey resultType="int" keyProperty="bno" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+        insert into tbl_notice (dname, content, title,regdate,updateDate)
+        values (#{dname},#{content}, #{title},#{regdate},#{updateDate})
+    </insert>
+    <select id="noticeList" resultType="com.docent.sp1.domain.Notice">
+        select bno,dname, content, title,regdate,updateDate
+        from tbl_notice
+        <include refid="search"></include>
+        order by bno desc
+        limit #{skip},#{size}
+    </select>
+
+    <select id="selectOne" resultType="com.docent.sp1.domain.Notice">
+        select * from tbl_notice where bno = #{bno}
+--         select * from tbl_notice n left join tbl_imgfile ti on n.bno = ti.bno where n.bno= #{bno}
+
+    </select>
+    <select id="getTotal" resultType="int">
+        select count(bno) from tbl_notice
+        <include refid="search"></include>
+    </select>
+
+</mapper>
