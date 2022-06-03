@@ -315,11 +315,14 @@
                     <button class="btn btn-primary uploadBtn" style="height: 30px;width: 200px;float: right">이미지 업로드
                     </button>
                 </div>
-                <div class="uploadResult">
-                </div>
+
+
                 <form class="actionForm" action="/tr/register" method="post">
+                    <div class="uploadResult">
+                    </div>
 
                     <div class="input-group mb-3">
+
                         <span class="input-group-text">제목</span>
                         <input type="text" class="form-control" aria-label="Sizing example input"
                                aria-describedby="inputGroup-sizing-default" name="title">
@@ -471,7 +474,7 @@
             uploadResult.innerHTML += resultArr.map( ({uuid,thumbnail,link,fileName,savePath, img}) => `
                 <div data-uuid='\${uuid}' data-img='\${img}'  data-filename='\${fileName}'  data-savepath='\${savePath}'>
                 <img src='/view1?fileName=\${thumbnail}'>
-                <button data-link='\${link}' class="delBtn">x</button>
+                <button type="button" data-link='\${link}' class="delBtn">x</button>
                 \${fileName}</div>`).join(" ")
 
             fileInput.remove()

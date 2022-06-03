@@ -49,7 +49,7 @@ private final FileMapper fileMapper;
 
         return noticeDTO;
     }
-
+    @Transactional
     @Override
     public void register(NoticeDTO noticeDTO) {
         Notice notice = modelMapper.map(noticeDTO, Notice.class);
@@ -60,7 +60,6 @@ private final FileMapper fileMapper;
 
 
         noticeMapper.noticeInsert(notice);
-
 
         files.forEach(file -> fileMapper.insertImg(file));
 
