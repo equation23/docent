@@ -130,6 +130,91 @@ public class UploadController {
 
         return Map.of("result", "success");
     }
+    @PostMapping("/docUpload")
+    @ResponseBody
+    public List<ImageFileDTO> docUpload(MultipartFile[] files){
+
+        List<ImageFileDTO> list = new ArrayList<>();
+
+        for (MultipartFile file:files) {
+
+            String originalFileName = file.getOriginalFilename();
+
+            boolean img = file.getContentType().startsWith("image");
+
+            String uuid = UUID.randomUUID().toString();
+
+            String saveName = uuid +"_"+ originalFileName;
+
+            String saveFolder = "C:\\projectFiles\\image\\";
+            File saveFile = new File("C:\\projectFiles\\image\\" +saveName);
+
+            try (InputStream in = file.getInputStream();
+                 FileOutputStream fos = new FileOutputStream(saveFile);
+            ){
+                FileCopyUtils.copy(in, fos);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            if(img){
+                //saveName = UUID+"_"+fileName
+                String thumbFileName = "s_"+saveName;
+                File thumbFile = new File("C:\\projectFiles\\image\\" +thumbFileName);
+
+                try {
+                    Thumbnails.of(saveFile)
+                            .size(200,200)
+                            .toFile(thumbFile);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            ImageFileDTO imageFileDTO = ImageFileDTO.builder()
+                    .fileName(originalFileName)
+                    .uuid(uuid)
+                    .img(img)
+                    .savePath(saveFolder)
+                    .build();
+
+
+            list.add(imageFileDTO);
+        }
+        return list;
+    }
+    @PostMapping("/docDelete")
+    @ResponseBody
+    public Map<String, String> docDelete(String fileName){
+
+
+        log.info("==========================");
+        log.info("==========================");
+        log.info(fileName);
+        log.info("==========================");
+        log.info("==========================");
+        int idx = fileName.lastIndexOf("/");
+        String path = fileName.substring(0,idx);
+        String name = fileName.substring(idx+1); //uuid_fileName
+        String uuid = name.substring(0,name.indexOf("_"));
+        log.info(path);
+        log.info(idx);
+        log.info(name);
+        log.info(uuid);
+
+        File targetFile = new File("C:\\projectFiles\\image\\" + name);
+        log.info(targetFile);
+        boolean result = targetFile.delete();
+
+        //thumbnail
+        if(result){
+            File thumbFile = new File("C:\\projectFiles\\image\\s_"+name);
+            thumbFile.delete();
+        }
+
+
+        return Map.of("result", "success");
+    }
     @GetMapping("/view1")
     public ResponseEntity<byte[]> viewFile(String fileName) {
 

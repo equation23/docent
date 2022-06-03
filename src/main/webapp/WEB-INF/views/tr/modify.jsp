@@ -309,9 +309,10 @@
 
                 <!-- Page Heading -->
                 <h1 class="h3 mb-4 text-gray-800">${dto.title} 수정 페이지</h1>
-                <div class="uploadResult">
-                </div>
+
                 <form class="actionForm" action="/tr/modify/${dto.bno}" method="post">
+                    <div class="uploadResult">
+                    </div>
                 <div class="form-floating mb-3">
                     <input type="text" name="title" class="form-control" value="<c:out value="${dto.title}"/>" placeholder="이름 수정">
                 </div>
@@ -324,7 +325,7 @@
                     <div>
                         <h5>이미지 수정</h5>
                         <input type="file" name="upload" class="uploadFile">
-                        <button class="uploadBtn">UPLOAD</button>
+                        <button class="uploadBtn" type="button">UPLOAD</button>
                     </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <button class="btn btn-primary me-md-2 modifyBtn" >수정</button>
@@ -377,13 +378,126 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
 
-    // document.querySelector('.modifyBtn').addEventListener("click",(e)=>{
-    //
-    //     console.log(document.querySelector('.title').value)
-    //     actionForm.submit()
-    // },false)
+    const uploadResult = document.querySelector(".uploadResult")
+
+    const cloneInput = document.querySelector(".uploadFile").cloneNode()
+
+
+    function loadImages(){
+        axios.get("/tr/docFiles/${dto.bno}").then(
+            res => {
+                const resultArr = res.data
+
+                uploadResult.innerHTML += resultArr.map( ({uuid,bthumbnail,link,fileName,savePath, img}) => `
+                <div data-uuid='\${uuid}' data-img='\${img}'  data-filename='\${fileName}'  data-savepath='\${savePath}'>
+                <img src='/view?fileName=\${bthumbnail}'>
+                <button data-link='\${link}' class="delBtn" type="button">x</button>
+                \${fileName}</div>`).join(" ")
+            }
+        )
+    }
+
+    loadImages()
+    document.querySelector(".modifyBtn").addEventListener("click",(e) => {
+        e.preventDefault()
+        e.stopPropagation()
+
+        const divArr = document.querySelectorAll(".uploadResult > div")
+
+        let str = "";
+        for(let i= 0;i < divArr.length; i++){
+            const fileObj = divArr[i]
+
+
+            const uuid = fileObj.getAttribute("data-uuid")
+            const img = fileObj.getAttribute("data-img")
+            const savePath = fileObj.getAttribute("data-savepath")
+            const fileName = fileObj.getAttribute("data-filename")
+
+            str += `<input type='hidden' name='uploads[\${i}].uuid' value='\${uuid}'>`
+            str += `<input type='hidden' name='uploads[\${i}].img' value='\${img}'>`
+            str += `<input type='hidden' name='uploads[\${i}].savePath' value='\${savePath}'>`
+            str += `<input type='hidden' name='uploads[\${i}].fileName' value='\${fileName}'>`
+
+        }//for
+
+        const  actionForm = document.querySelector(".actionForm")
+        uploadResult.innerHTML+=str
+        actionForm.submit()
+
+
+    },false)
+
+
+    uploadResult.addEventListener("click", (e) => {
+
+        if(e.target.getAttribute("class").indexOf("delBtn") < 0){
+            return
+        }
+        const btn = e.target
+        const link = btn.getAttribute("data-link")
+        console.log(link)
+        deleteToServer(link).then(result => {
+            btn.closest("div").remove()
+        })
+
+    }, false)
+
+    document.querySelector(".uploadBtn").addEventListener("click",(e)=> {
+
+        const formObj = new FormData();
+
+        const fileInput = document.querySelector(".uploadFile")
+
+        const files = fileInput.files
+
+        for (let i = 0; i < files.length; i++) {
+
+            formObj.append("files", files[i])
+        }
+
+
+
+        uploadToServer(formObj).then(resultArr => {
+
+            uploadResult.innerHTML += resultArr.map( ({uuid,bthumbnail,link,fileName,savePath, img}) => `
+                <div data-uuid='\${uuid}' data-img='\${img}'  data-filename='\${fileName}'  data-savepath='\${savePath}'>
+                <img src='/view?fileName=\${bthumbnail}'>
+                <button type="button" data-link='\${link}' class="delBtn">x</button>
+                \${fileName}</div>`).join(" ")
+
+
+            document.querySelector(".uploadInputDiv").appendChild(cloneInput)
+            fileInput.remove()
+        })
+
+    }, false)
+
+    async function deleteToServer(fileName){
+        const options = {headers: { "Content-Type": "application/x-www-form-urlencoded"}}
+
+        const res = await axios.post("/docDelete", "fileName="+fileName, options )
+        console.log(res)
+        return res.data
+    }
+
+    async function uploadToServer (formObj) {
+
+        const response = await axios({
+            method: 'post',
+            url: '/docUpload',
+            data: formObj,
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+
+        return response.data
+    }
+
 </script>
 <%--fontawsome--%>
 <script src="https://kit.fontawesome.com/e4c9df973b.js" crossorigin="anonymous"></script>

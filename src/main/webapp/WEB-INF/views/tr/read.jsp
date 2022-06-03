@@ -411,7 +411,7 @@
                 console.log(arr)
                 let str = ""
                 for (let i = 0; i < arr.length; i++) {
-                    str += `<img src='/view?fileName=\${arr[i].thumbnail}' class="card-img-top" style=" width:auto; height: auto;margin: auto">`
+                    str += `<img src='/view?fileName=\${arr[i].bthumbnail}' class="card-img-top" style=" width:auto; height: auto;margin: auto">`
                 }
                 document.querySelector(".pictures").innerHTML = str
             }

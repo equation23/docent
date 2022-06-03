@@ -23,8 +23,10 @@ public class ImageFileDTO {
     public String getBimg(){
         return uuid+"_"+fileName;
     }
-    public String getThumbnail(){
+    public String getBthumbnail(){
         return "/s_"+uuid+"_"+fileName;
     }
-
+    public String getThumbnail(){
+        return   savePath+"/s_"+uuid+"_"+fileName;
+    }
 }
