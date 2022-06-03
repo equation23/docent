@@ -43,7 +43,7 @@ public class SelTest3 {
 //        options.addArguments("headless");
 
         WebDriver driver = new ChromeDriver(options);
-        for (int i = 12; i < 15; i++) {
+        for (int i = 1; i < 3; i++) {
             driver.get(String.format("https://www.heritage.go.kr/heri/cul/culSelectViewList.do?gbn=2&pageNo=1_1_1_1&culPageNo=%d&ccbaCndt=&searchCondition=&region=1&s_kdcdArr=11&s_kdcdArr=12&s_kdcdArr=13&s_kdcdArr=15&s_ctcdArr=00&ccbaPcd1Arr=01&ccbaPcd1Arr=03&ccbaPcd1Arr=05&ccbaPcd1Arr=07&ccbaPcd1Arr=09&ccbaPcd1Arr=10&ccbaPcd1Arr=11&ccbaPcd1Arr=12&ccbaPcd1Arr=13&ccbaPcd1Arr=15&ccbaPcd1Arr=20&ccbaPcd1Arr=30&ccbaPcd1Arr=40&ccbaPcd1Arr=45&ccbaPcd1Arr=50&stCcbaAsdt=&endCcbaAsdt=&ccbaGcodeArr=00&sortType=&sortOrd=", i));
             for (int j = 1; j < 13; j++) {
                 Thread.sleep(1000);
@@ -77,7 +77,7 @@ public class SelTest3 {
                 String imguuid = UUID.randomUUID().toString();
 
                 String saveImg = imguuid +"_"+ array[0] +".jpg";
-
+                String originalFileName = array[0] +".jpg";
                 String savePath = "C:\\ProjectFiles\\image\\";
 
                 OutputStream imgfos = new FileOutputStream(savePath+saveImg);
@@ -106,7 +106,7 @@ public class SelTest3 {
                 }
 
 
-                String image = "/view?fileName="+thumbFileName;
+//                String image = "/view?fileName="+thumbFileName;
 
                 driver.close();
                 driver.switchTo().window(winHandleBefore);
@@ -124,7 +124,7 @@ public class SelTest3 {
 
                 String saveAudio = uuid +"_"+ array[0] +"audio"+".mp3";
 
-                String audioview = "/audio?fileName="+saveAudio;
+//                String audioview = "/audio?fileName="+saveAudio;
 
                 OutputStream fos = new FileOutputStream("C:\\ProjectFiles\\audio\\"+saveAudio);
 
@@ -142,15 +142,15 @@ public class SelTest3 {
                         .title(array[0])
                         .classify(type)
                         .introduce(introduce)
-                        .image(image)
-                        .audio(audioview)
+                        .image(thumbFileName)
+                        .audio(saveAudio)
                         .location(place)
                         .build();
 
                 boardMapper.insert(board);
 
                 ImgFile imgFile= ImgFile.builder()
-                        .fileName(saveImg)
+                        .fileName(originalFileName)
                         .uuid(imguuid)
                         .savePath(savePath)
                         .bno(board.getBno())

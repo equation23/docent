@@ -20,8 +20,11 @@ public class ImageFileDTO {
     public String getLink(){
         return savePath+"/"+uuid+"_"+fileName;
     }
+    public String getBimg(){
+        return uuid+"_"+fileName;
+    }
     public String getThumbnail(){
-        return savePath+"/s_"+uuid+"_"+fileName;
+        return "/s_"+uuid+"_"+fileName;
     }
 
 }

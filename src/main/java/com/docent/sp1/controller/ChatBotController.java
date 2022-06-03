@@ -17,7 +17,7 @@ public class ChatBotController {
 
         System.out.println(map);
         String value =((Map)map.get("queryResult")).get("queryText").toString();
-        System.out.println("INPUT VALUE" + value);
+        System.out.println("INPUT VALUE :  " + value);
         String str ="{\"fulfillmentMessages\": [{\"text\": { \"text\": [\""+ new String("문의 접수가 완료되었습니다.")+"\"]}}]}";
 
         return str;

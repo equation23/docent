@@ -148,5 +148,23 @@ public class UploadController {
             return ResponseEntity.status(404).build();
         }
     }
+    @GetMapping("/defaultImage")
+    public ResponseEntity<byte[]> defaultImage(String fileName) {
+
+        File targetFileImg = new File("C:\\projectFiles\\defaultImage\\" + fileName);
+
+        try {
+            String mimeType = Files.probeContentType(targetFileImg.toPath());
+
+            byte[] data = FileCopyUtils.copyToByteArray(targetFileImg);
+
+            return ResponseEntity.ok().header("Content-Type", mimeType)
+                    .body(data);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(404).build();
+        }
+    }
 }
 

@@ -322,7 +322,7 @@
                 <ul class="dtoList">
                     <c:forEach items="${dtoList}" var="board">
                         <div class="card pictures" style="width: 18rem;">
-                            <img src='${board.image}'  class="card-img-top card" style="width:200px; height: 200px;margin:auto; border: 0" >
+                            <img src='/view?fileName=${board.image}'  class="card-img-top card" style="width:200px; height: 200px;margin:auto; border: 0" >
                             <div class="card-body">
                                 <p style="text-align:center" class="card-text">${board.classify}</p>
                                 <h5 style="text-align:center" class="card-title">${board.title}</h5>
@@ -411,8 +411,19 @@
     <input type="hidden" name="type" value="${listDTO.type == null?'':listDTO.type}">
     <input type="hidden" name="keyword" value="${listDTO.keyword == null? '':listDTO.keyword}">
 </form>
-
+<script type="text/javascript">
+    (function(d, m){
+        var kommunicateSettings =
+            {"appId":"202167a7f56e0db29364f2264282ebb0","popupWidget":true,"automaticChatOpenOnNavigation":true};
+        var s = document.createElement("script"); s.type = "text/javascript"; s.async = true;
+        s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+        var h = document.getElementsByTagName("head")[0]; h.appendChild(s);
+        window.kommunicate = m; m._globals = kommunicateSettings;
+    })(document, window.kommunicate || {});
+    /* NOTE : Use web server to view HTML files as real-time update will not work if you directly open the HTML file in the browser. */
+</script>
 <script>
+
     const linkDiv = document.querySelector(".pagination")
     const actionForm = document.querySelector(".actionForm")
 

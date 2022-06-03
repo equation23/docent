@@ -1,8 +1,6 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
 <!DOCTYPE html>
@@ -54,7 +52,6 @@
                 <i class="fa-regular fa-bell"></i>
                 <span>공지사항</span></a>
         </li>
-
 
 
         <!-- Nav Item - Pages Collapse Menu -->
@@ -120,7 +117,8 @@
                                 <option value="w" ${listDTO.type =="w"?"selected":""}>설명</option>
                             </select>
                         </div>
-                        <input type="text" class="form-control bg-light border-0 small searchKey" name="keyword" placeholder="Search for..."
+                        <input type="text" class="form-control bg-light border-0 small searchKey" name="keyword"
+                               placeholder="Search for..."
                                aria-label="Search" aria-describedby="basic-addon2" value="${listDTO.keyword}">
                         <div class="input-group-append">
                             <button class="btn btn-primary searchBtn" type="submit">
@@ -315,17 +313,17 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button class="btn btn-primary me-md-2" onclick="history.back()" >목록으로</button>
+                    <button class="btn btn-primary me-md-2" onclick="history.back()">목록으로</button>
                 </div>
                 <!-- Page Heading -->
                 <h1 class="h3 mb-4 text-gray-800" style="text-align: left">${dto.title}</h1>
+                    <div class="card mb-3 content pictures" style="width: 60vh; height: 60vh; float:left; margin-right:20px;">
 
-                <div class="card mb-3 content" style="width: 60vh; height: 60vh; float:left; margin-right:20px;" >
-                    <img src="${dto.image}" class="card-img-top" style=" width:auto; height: auto;margin: auto" >
-                </div>
+                    </div>
+
                 <div id="map" style="width:60vh;height:60vh; float:left"></div>
                 <div style="clear:both;"></div>
-                <div class="card" >
+                <div class="card">
                     <div class="card-body">
                         <p class="card-text"><small class="text-muted">${dto.classify}</small></p>
                         <h5 class="card-title">${dto.title}</h5>
@@ -336,33 +334,33 @@
                     </div>
                 </div>
                 <audio controls>
-                    <source src="${dto.audio}" type="audio/mpeg">
+                    <source src="/audio?fileName=${dto.audio}" type="audio/mpeg">
                     오디오를 지원하지 않는 브라우저입니다.
                 </audio>
                 <div style="text-align: right">
-                <form class="modify" action="/tr/modify/${dto.bno}" method="get">
-                    <button class="btn btn-primary me-md-2 modifyBtn">수정하기</button>
-                </form>
-                </div>
+                    <form class="modify" action="/tr/modify/${dto.bno}" method="get">
+                        <button class="btn btn-primary me-md-2 modifyBtn">수정하기</button>
+                    </form>
                 </div>
             </div>
-    </div>
-            <!-- /.container-fluid -->
         </div>
-        <!-- End of Main Content -->
-
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2020</span>
-                </div>
-            </div>
-        </footer>
-        <!-- End of Footer -->
-
     </div>
-    <!-- End of Content Wrapper -->
+    <!-- /.container-fluid -->
+</div>
+<!-- End of Main Content -->
+
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Your Website 2020</span>
+        </div>
+    </div>
+</footer>
+<!-- End of Footer -->
+
+</div>
+<!-- End of Content Wrapper -->
 
 </div>
 
@@ -391,7 +389,8 @@
             </div>
         </div>
     </div>
-</div><form class="actionForm" action="/tr/list" method="get">
+</div>
+<form class="actionForm" action="/tr/list" method="get">
     <input type="hidden" name="page" value="${listDTO.page}">
     <input type="hidden" name="size" value="${listDTO.size}">
     <input type="hidden" name="type" value="${listDTO.type == null?'':listDTO.type}">
@@ -399,7 +398,26 @@
 </form>
 
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=06c294e1f66b2f5ab1e7bc5a46cd0311&libraries=services" ></script>
+<script type="text/javascript"
+        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=06c294e1f66b2f5ab1e7bc5a46cd0311&libraries=services"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    showImg()
+
+    function showImg() {
+        axios.get("/tr/docFiles/${dto.bno}").then(
+            res => {
+                const arr = res.data
+                console.log(arr)
+                let str = ""
+                for (let i = 0; i < arr.length; i++) {
+                    str += `<img src='/view?fileName=\${arr[i].thumbnail}' class="card-img-top" style=" width:auto; height: auto;margin: auto">`
+                }
+                document.querySelector(".pictures").innerHTML = str
+            }
+        )
+    }
+</script>
 <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         mapOption = {
@@ -414,7 +432,7 @@
     var geocoder = new kakao.maps.services.Geocoder();
 
     // 주소로 좌표를 검색합니다
-    geocoder.addressSearch('${dto.location}', function(result, status) {
+    geocoder.addressSearch('${dto.location}', function (result, status) {
 
         // 정상적으로 검색이 완료됐으면
         if (status === kakao.maps.services.Status.OK) {
@@ -442,23 +460,23 @@
 <script>
     const actionForm = document.querySelector(".actionForm")
 
-    document.querySelector(".searchBtn").addEventListener("click",(e)=> {
+    document.querySelector(".searchBtn").addEventListener("click", (e) => {
         e.preventDefault()
         e.stopPropagation()
         const type = document.querySelector('.searchDiv .type').value
         const keyword = document.querySelector(".searchDiv input[name='keyword']").value
 
-        actionForm.setAttribute("action","/tr/list")
+        actionForm.setAttribute("action", "/tr/list")
         actionForm.querySelector("input[name='page']").value = 1
         actionForm.querySelector("input[name='type']").value = type
         actionForm.querySelector("input[name='keyword']").value = keyword
         actionForm.submit()
-    },false)
+    }, false)
 
-    document.querySelector('.modifyBtn').addEventListener("click",(e)=>{
+    document.querySelector('.modifyBtn').addEventListener("click", (e) => {
 
 
-    },false)
+    }, false)
 
 </script>
 <%--fontawsome--%>

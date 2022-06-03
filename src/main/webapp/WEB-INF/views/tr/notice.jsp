@@ -76,7 +76,7 @@
 
         <!-- Nav Item - Tables -->
         <li class="nav-item">
-            <a class="nav-link" href='/tr/userdata'>
+            <a class="nav-link" href='/tr/member'>
                 <i class="fas fa-fw fa-table"></i>
                 <span>사용자 정보</span></a>
         </li>

@@ -121,6 +121,12 @@ public class BoardController {
 
         return noticeService.getFiles(bno);
     }
+    @GetMapping("/docFiles/{bno}")
+    @ResponseBody
+    public List<ImageFileDTO> getDocFiles(@PathVariable("bno") Integer bno){
+
+        return fileService.getFiles(bno);
+    }
 }
 
 
