@@ -470,7 +470,7 @@
                 \${fileName}</div>`).join(" ")
 
 
-            document.querySelector(".uploadInputDiv").appendChild(cloneInput)
+            document.querySelector(".uploadInputDiv").appendChild(cloneInput.cloneNode())
             fileInput.remove()
         })
 

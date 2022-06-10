@@ -33,7 +33,9 @@ public class BoardController {
     }
     @GetMapping("/main")
     public void main(ListDTO listDTO, Model model){
+        ListResponseDTO<BoardDTO> responseDTO = service.getList(listDTO);
 
+        model.addAttribute("dtoList", responseDTO.getDtoList());
     }
 
     @GetMapping("/list")
