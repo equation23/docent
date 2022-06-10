@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<div id="map" style="width:100%;height:350px; flex: auto"></div>
+<div id="map" style="width:auto;height:36rem; flex: auto"></div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=06c294e1f66b2f5ab1e7bc5a46cd0311&libraries=services"></script>
 <script>
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div
