@@ -62,17 +62,17 @@
         </li>
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link" href='/tr/bot'>
+            <a class="nav-link" href='https://dialogflow.cloud.google.com/#/agent/newagent-nsfe/intents'>
                 <i class="fa-solid fa-robot"></i>
                 <span>챗봇</span></a>
         </li>
 
         <!-- Nav Item - Charts -->
-        <li class="nav-item">
-            <a class="nav-link" href='/tr/statistics'>
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>통계</span></a>
-        </li>
+<%--        <li class="nav-item">--%>
+<%--            <a class="nav-link" href='/tr/statistics'>--%>
+<%--                <i class="fas fa-fw fa-chart-area"></i>--%>
+<%--                <span>통계</span></a>--%>
+<%--        </li>--%>
 
         <!-- Nav Item - Tables -->
         <li class="nav-item">
@@ -405,17 +405,24 @@
     showImg()
 
     function showImg() {
+
         axios.get("/tr/docFiles/${dto.bno}").then(
             res => {
                 const arr = res.data
                 console.log(arr)
                 let str = ""
+                <c:if test="${dto.image != null}">
                 for (let i = 0; i < arr.length; i++) {
                     str += `<img src='/view?fileName=\${arr[i].bthumbnail}' class="card-img-top" style=" width:auto; height: auto;margin: auto">`
                 }
+                </c:if>
+                <c:if test="${dto.image == null}">
+                    str += `<img src='/defaultImage?fileName=no_image.jpg' class="card-img-top" style=" width:auto; height: auto;margin: auto">`
+                </c:if>
                 document.querySelector(".pictures").innerHTML = str
             }
         )
+
     }
 </script>
 <script>

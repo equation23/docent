@@ -33,4 +33,21 @@ public class FileServiceImpl implements FileService{
         return imgFiles.stream().map(imgFile -> modelMapper.map(imgFile, ImageFileDTO.class))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void update(ImageFileDTO imageFileDTO) {
+
+
+        fileMapper.docUpdate(ImgFile.builder()
+                .uuid(imageFileDTO.getUuid())
+                .bno(imageFileDTO.getBno())
+                .fileName(imageFileDTO.getFileName())
+                .savePath(imageFileDTO.getSavePath())
+                .build());
+    }
+
+    @Override
+    public void delete(Integer bno) {
+        fileMapper.docImgDelete(bno);
+    }
 }

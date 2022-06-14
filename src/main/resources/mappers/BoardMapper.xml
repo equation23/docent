@@ -50,6 +50,6 @@
         <include refid="search"></include>
     </select>
     <update id="update">
-        update tbl_doc set title =#{title}, introduce = #{introduce},classify = #{classify},updateDate = now() where bno =#{bno}
+        update tbl_doc set title =#{title}, introduce = #{introduce},image = #{image},classify = #{classify},location=#{location},updateDate = now() where bno =#{bno}
     </update>
 </mapper>

@@ -65,17 +65,17 @@
         </li>
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link" href='/tr/bot'>
+            <a class="nav-link" href='https://dialogflow.cloud.google.com/#/agent/newagent-nsfe/intents'>
                 <i class="fa-solid fa-robot"></i>
                 <span>챗봇</span></a>
         </li>
 
         <!-- Nav Item - Charts -->
-        <li class="nav-item">
-            <a class="nav-link" href='/tr/statistics'>
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>통계</span></a>
-        </li>
+<%--        <li class="nav-item">--%>
+<%--            <a class="nav-link" href='/tr/statistics'>--%>
+<%--                <i class="fas fa-fw fa-chart-area"></i>--%>
+<%--                <span>통계</span></a>--%>
+<%--        </li>--%>
 
         <!-- Nav Item - Tables -->
         <li class="nav-item">
@@ -322,7 +322,12 @@
                 <ul class="dtoList">
                     <c:forEach items="${dtoList}" var="board">
                         <div class="card pictures" style="width: 18rem;">
+                            <c:if test="${board.image != null}">
                             <img src='/view?fileName=${board.image}'  class="card-img-top card" style="width:200px; height: 200px;margin:auto; border: 0" >
+                            </c:if>
+                            <c:if test="${board.image == null}">
+                                <img src='/defaultImage?fileName=no_image.jpg'  class="card-img-top card" style="width:200px; height: 200px;margin:auto; border: 0" >
+                            </c:if>
                             <div class="card-body">
                                 <p style="text-align:center" class="card-text">${board.classify}</p>
                                 <h5 style="text-align:center" class="card-title">${board.title}</h5>

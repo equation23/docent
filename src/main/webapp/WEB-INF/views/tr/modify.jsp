@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 
@@ -55,7 +55,6 @@
         </li>
 
 
-
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link" href='/tr/list'>
@@ -64,17 +63,17 @@
         </li>
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link" href='/tr/bot'>
+            <a class="nav-link" href='https://dialogflow.cloud.google.com/#/agent/newagent-nsfe/intents'>
                 <i class="fa-solid fa-robot"></i>
                 <span>챗봇</span></a>
         </li>
 
         <!-- Nav Item - Charts -->
-        <li class="nav-item">
-            <a class="nav-link" href='/tr/statistics'>
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>통계</span></a>
-        </li>
+        <%--        <li class="nav-item">--%>
+        <%--            <a class="nav-link" href='/tr/statistics'>--%>
+        <%--                <i class="fas fa-fw fa-chart-area"></i>--%>
+        <%--                <span>통계</span></a>--%>
+        <%--        </li>--%>
 
         <!-- Nav Item - Tables -->
         <li class="nav-item">
@@ -313,23 +312,30 @@
                 <form class="actionForm" action="/tr/modify/${dto.bno}" method="post">
                     <div class="uploadResult">
                     </div>
-                <div class="form-floating mb-3">
-                    <input type="text" name="title" class="form-control" value="<c:out value="${dto.title}"/>" placeholder="이름 수정">
-                </div>
-                <div class="form-floating">
-                    <input type="text" name="classify" class="form-control" value="<c:out value="${dto.classify}"/>" placeholder="분류 수정">
-                </div>
-                <div>
-                    <textarea  name="introduce" style="width: 1262px; height: 400px; flex: auto"><c:out value="${dto.introduce}"/></textarea>
-                </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" name="title" class="form-control" value="<c:out value="${dto.title}"/>"
+                               placeholder="이름 수정">
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" name="classify" class="form-control" value="<c:out value="${dto.classify}"/>"
+                               placeholder="분류 수정">
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" name="location" class="form-control" value="<c:out value="${dto.location}"/>"
+                               placeholder="장소 수정">
+                    </div>
+                    <div>
+                        <textarea name="introduce" style="width: 1262px; height: 400px; flex: auto"><c:out
+                                value="${dto.introduce}"/></textarea>
+                    </div>
                     <div>
                         <h5>이미지 수정</h5>
                         <input type="file" name="upload" class="uploadFile">
                         <button class="uploadBtn" type="button">UPLOAD</button>
                     </div>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button class="btn btn-primary me-md-2 modifyBtn" >수정</button>
-                </div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button class="btn btn-primary me-md-2 modifyBtn">수정</button>
+                    </div>
                 </form>
             </div>
 
@@ -386,12 +392,12 @@
     const cloneInput = document.querySelector(".uploadFile").cloneNode()
 
 
-    function loadImages(){
+    function loadImages() {
         axios.get("/tr/docFiles/${dto.bno}").then(
             res => {
                 const resultArr = res.data
 
-                uploadResult.innerHTML += resultArr.map( ({uuid,bthumbnail,link,fileName,savePath, img}) => `
+                uploadResult.innerHTML += resultArr.map(({uuid, bthumbnail, link, fileName, savePath, img}) => `
                 <div data-uuid='\${uuid}' data-img='\${img}'  data-filename='\${fileName}'  data-savepath='\${savePath}'>
                 <img src='/view?fileName=\${bthumbnail}'>
                 <button data-link='\${link}' class="delBtn" type="button">x</button>
@@ -401,14 +407,14 @@
     }
 
     loadImages()
-    document.querySelector(".modifyBtn").addEventListener("click",(e) => {
+    document.querySelector(".modifyBtn").addEventListener("click", (e) => {
         e.preventDefault()
         e.stopPropagation()
 
         const divArr = document.querySelectorAll(".uploadResult > div")
 
         let str = "";
-        for(let i= 0;i < divArr.length; i++){
+        for (let i = 0; i < divArr.length; i++) {
             const fileObj = divArr[i]
 
 
@@ -422,19 +428,22 @@
             str += `<input type='hidden' name='uploads[\${i}].savePath' value='\${savePath}'>`
             str += `<input type='hidden' name='uploads[\${i}].fileName' value='\${fileName}'>`
 
+            str += `<input type='hidden' name='image' value='s_\${uuid}_\${fileName}'>`
+
+
         }//for
 
-        const  actionForm = document.querySelector(".actionForm")
-        uploadResult.innerHTML+=str
+        const actionForm = document.querySelector(".actionForm")
+        uploadResult.innerHTML += str
         actionForm.submit()
 
 
-    },false)
+    }, false)
 
 
     uploadResult.addEventListener("click", (e) => {
 
-        if(e.target.getAttribute("class").indexOf("delBtn") < 0){
+        if (e.target.getAttribute("class").indexOf("delBtn") < 0) {
             return
         }
         const btn = e.target
@@ -446,7 +455,7 @@
 
     }, false)
 
-    document.querySelector(".uploadBtn").addEventListener("click",(e)=> {
+    document.querySelector(".uploadBtn").addEventListener("click", (e) => {
 
         const formObj = new FormData();
 
@@ -460,14 +469,15 @@
         }
 
 
-
         uploadToServer(formObj).then(resultArr => {
 
-            uploadResult.innerHTML += resultArr.map( ({uuid,bthumbnail,link,fileName,savePath, img}) => `
+            uploadResult.innerHTML += resultArr.map(({uuid, bthumbnail, link, fileName, savePath, img}) => `
                 <div data-uuid='\${uuid}' data-img='\${img}'  data-filename='\${fileName}'  data-savepath='\${savePath}'>
                 <img src='/view?fileName=\${bthumbnail}'>
                 <button type="button" data-link='\${link}' class="delBtn">x</button>
                 \${fileName}</div>`).join(" ")
+
+            console.log(resultArr)
 
 
             document.querySelector(".uploadInputDiv").appendChild(cloneInput.cloneNode())
@@ -476,15 +486,15 @@
 
     }, false)
 
-    async function deleteToServer(fileName){
-        const options = {headers: { "Content-Type": "application/x-www-form-urlencoded"}}
+    async function deleteToServer(fileName) {
+        const options = {headers: {"Content-Type": "application/x-www-form-urlencoded"}}
 
-        const res = await axios.post("/docDelete", "fileName="+fileName, options )
-        console.log(res)
+        const res = await axios.post("/docDelete", "fileName=" + fileName, options)
+
         return res.data
     }
 
-    async function uploadToServer (formObj) {
+    async function uploadToServer(formObj) {
 
         const response = await axios({
             method: 'post',

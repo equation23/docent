@@ -29,4 +29,5 @@ public class ImageFileDTO {
     public String getThumbnail(){
         return   savePath+"/s_"+uuid+"_"+fileName;
     }
+
 }

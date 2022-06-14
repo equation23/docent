@@ -72,7 +72,16 @@ public class BoardController {
     @PostMapping("/modify/{bno}")
     public String postModify(@PathVariable("bno") Integer bno, BoardDTO boardDTO, ListDTO listDTO) {
         boardDTO.setBno(bno);
+        log.info("=================");
+        log.info("=================");
+        log.info("=================");
+        log.info(boardDTO);
 
+        log.info("=================");
+        log.info("=================");
+        log.info("=================");
+
+        service.update(boardDTO);
 
         return "redirect:/tr/read/"+bno+listDTO.getLink();
     }

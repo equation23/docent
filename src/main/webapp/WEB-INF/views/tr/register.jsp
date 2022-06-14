@@ -62,17 +62,17 @@
         </li>
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link" href='/tr/bot'>
+            <a class="nav-link" href='https://dialogflow.cloud.google.com/#/agent/newagent-nsfe/intents'>
                 <i class="fa-solid fa-robot"></i>
                 <span>챗봇</span></a>
         </li>
 
         <!-- Nav Item - Charts -->
-        <li class="nav-item">
-            <a class="nav-link" href='/tr/statistics'>
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>통계</span></a>
-        </li>
+<%--        <li class="nav-item">--%>
+<%--            <a class="nav-link" href='/tr/statistics'>--%>
+<%--                <i class="fas fa-fw fa-chart-area"></i>--%>
+<%--                <span>통계</span></a>--%>
+<%--        </li>--%>
 
         <!-- Nav Item - Tables -->
         <li class="nav-item">

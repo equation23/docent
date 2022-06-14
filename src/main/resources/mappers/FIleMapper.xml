@@ -11,8 +11,8 @@
     </insert>
 
     <insert id="insertBoardImg">
-        insert into tbl_docimg (uuid,fileName,savePath,bno)
-        values (#{uuid}, #{fileName},#{savePath},last_insert_id())
+        insert into tbl_docimg (uuid,fileName,savePath,bno,img)
+        values (#{uuid}, #{fileName},#{savePath},#{img},last_insert_id())
     </insert>
 
     <select id="getImg" resultType="com.docent.sp1.domain.ImgFile">
@@ -22,4 +22,15 @@
     <select id="getBoardImg" resultType="com.docent.sp1.domain.ImgFile">
         select * from tbl_docimg where bno = #{bno}
     </select>
+    <update id="docUpdate">
+        update tbl_docimg set uuid =#{uuid}, fileName = #{fileName},savePath = #{savePath} where bno =#{bno}
+    </update>
+    <delete id="docImgDelete">
+        delete from tbl_docimg where bno = #{bno}
+    </delete>
+
+    <insert id="updateBoardImage">
+        insert into tbl_docimg (uuid,fileName,savePath,bno,img)
+        values (#{uuid}, #{fileName},#{savePath},#{bno},#{img})
+    </insert>
 </mapper>

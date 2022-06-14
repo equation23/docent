@@ -11,4 +11,7 @@ public interface FileMapper {
     void insertImg(ImgFile imgFile);
     void insertBoardImg(ImgFile imgFile);
     List<ImgFile> getBoardImg(Integer bno);
+    void docUpdate(ImgFile imgFile);
+    void docImgDelete(Integer bno);
+    void updateBoardImage(ImgFile imgFile);
 }
