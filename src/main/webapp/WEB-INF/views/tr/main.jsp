@@ -404,7 +404,7 @@
 
     } else { // HTML5의 GeoLocation을 사용할 수 없을때 마커 표시 위치와 인포윈도우 내용을 설정합니다
 
-        var locPosition = new kakao.maps.LatLng(33.450701, 126.570667),
+        var locPosition = new kakao.maps.LatLng(),
             message = '현재 위치를 사용할 수 없습니다.'
 
         displayMarker(locPosition, message);

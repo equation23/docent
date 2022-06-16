@@ -11,6 +11,6 @@ public interface BoardService {
     ListResponseDTO<BoardDTO> getList (ListDTO listDTO);
     BoardDTO getOne(Integer bno);
     void update(BoardDTO boardDTO);
-
+    ListResponseDTO<BoardDTO> getAll (ListDTO listDTO);
 
 }

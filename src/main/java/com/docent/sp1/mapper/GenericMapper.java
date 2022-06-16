@@ -10,6 +10,8 @@ public interface GenericMapper <E,K>{
 
     List<Board> selectList (ListDTO listDTO);
 
+    List<Board> selectAllList (ListDTO listDTO);
+
     int getTotal(ListDTO listDTO);
 
     void delete (K bno);

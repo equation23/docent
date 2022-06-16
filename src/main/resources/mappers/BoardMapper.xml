@@ -38,6 +38,12 @@
         limit #{skip},#{size}
     </select>
 
+    <select id="selectAllList" resultType="com.docent.sp1.domain.Board">
+        select bno,title,image,classify,location,introduce,audio,updatedate
+        from tbl_doc
+        order by bno asc
+    </select>
+
     <delete id="delete">
         delete from tbl_doc where #{bno}
     </delete>

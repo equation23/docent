@@ -75,5 +75,20 @@ public class BoardServiceImpl implements BoardService {
             fileMapper.updateBoardImage(imgFile);
         }// 여기까지 되야 업뎃 성공
     }
+
+    @Override
+    public ListResponseDTO<BoardDTO> getAll(ListDTO listDTO) {
+        List<Board> boardList = boardMapper.selectAllList(listDTO);
+
+        List<BoardDTO> dtoList =
+                boardList.stream()
+                        .map(board -> modelMapper.map(board, BoardDTO.class))
+                        .collect(Collectors.toList());
+
+        return ListResponseDTO.<BoardDTO>builder()
+                .dtoList(dtoList)
+                .total(boardMapper.getTotal(listDTO))
+                .build();
+    }
 }
 
