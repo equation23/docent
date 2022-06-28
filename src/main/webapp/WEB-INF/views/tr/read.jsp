@@ -413,7 +413,7 @@
                 let str = ""
                 <c:if test="${dto.image != null}">
                 for (let i = 0; i < arr.length; i++) {
-                    str += `<img src='/view?fileName=\${arr[i].bthumbnail}' class="card-img-top" style=" width:auto; height: auto;margin: auto">`
+                    str += `<img src='/view?fileName=\${arr[i].thumbnail}' class="card-img-top" style=" width:auto; height: auto;margin: auto">`
                 }
                 </c:if>
                 <c:if test="${dto.image == null}">

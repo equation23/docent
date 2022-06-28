@@ -53,8 +53,8 @@ public class UploadController {
 
             String saveName = uuid +"_"+ originalFileName;
 
-            String saveFolder = makeFolders();
-
+            String saveFolder =  makeFolders();
+            String saveLocation = "C:\\projectFiles\\boardImage\\" + saveFolder;
             File saveFile = new File("C:\\projectFiles\\boardImage\\" +saveFolder+"\\"+saveName);
 
             try (InputStream in = file.getInputStream();
@@ -83,7 +83,7 @@ public class UploadController {
                     .fileName(originalFileName)
                     .uuid(uuid)
                     .img(img)
-                    .savePath(saveFolder)
+                    .savePath(saveLocation)
                     .build();
 
 
@@ -117,7 +117,7 @@ public class UploadController {
 
 
 
-        File targetFile = new File("C:\\projectFiles\\boardImage\\" + fileName);
+        File targetFile = new File("C:\\projectFiles\\boardImage\\"+makeFolders()+"\\" + fileName);
 
         boolean result = targetFile.delete();
 
@@ -217,8 +217,10 @@ public class UploadController {
     }
     @GetMapping("/view1")
     public ResponseEntity<byte[]> viewFile(String fileName) {
-
-        File targetFileImg = new File("C:\\projectFiles\\boardImage\\" + fileName);
+        log.info("-----------------");
+        log.info(fileName);
+        log.info("--------------");
+        File targetFileImg = new File("C:\\projectFiles\\boardImage\\"+makeFolders()+"\\" + fileName);
 
         try {
             String mimeType = Files.probeContentType(targetFileImg.toPath());

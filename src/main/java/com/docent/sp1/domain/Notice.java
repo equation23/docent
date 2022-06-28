@@ -3,6 +3,7 @@ package com.docent.sp1.domain;
 import lombok.*;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -20,6 +21,8 @@ public class Notice {
 
     private boolean img;
 
-    private LocalDateTime regdate, updateDate;
+    private LocalDate regdate;
+    private LocalDateTime updateDate;
+
 
 }

@@ -17,17 +17,12 @@ public class ImageFileDTO {
     public ImageFileDTO(){
 
     }
+
     public String getLink(){
-        return savePath+"/"+uuid+"_"+fileName;
-    }
-    public String getBimg(){
         return uuid+"_"+fileName;
     }
-    public String getBthumbnail(){
-        return "/s_"+uuid+"_"+fileName;
-    }
     public String getThumbnail(){
-        return   savePath+"/s_"+uuid+"_"+fileName;
+        return "/s_"+uuid+"_"+fileName;
     }
 
 }

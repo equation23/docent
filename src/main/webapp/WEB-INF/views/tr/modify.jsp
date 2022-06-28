@@ -397,9 +397,9 @@
             res => {
                 const resultArr = res.data
 
-                uploadResult.innerHTML += resultArr.map(({uuid, bthumbnail, link, fileName, savePath, img}) => `
+                uploadResult.innerHTML += resultArr.map(({uuid, thumbnail, link, fileName, savePath, img}) => `
                 <div data-uuid='\${uuid}' data-img='\${img}'  data-filename='\${fileName}'  data-savepath='\${savePath}'>
-                <img src='/view?fileName=\${bthumbnail}'>
+                <img src='/view?fileName=\${thumbnail}'>
                 <button data-link='\${link}' class="delBtn" type="button">x</button>
                 \${fileName}</div>`).join(" ")
             }
