@@ -187,28 +187,26 @@ public class UploadController {
     @ResponseBody
     public Map<String, String> docDelete(String fileName){
 
-
         log.info("==========================");
         log.info("==========================");
         log.info(fileName);
         log.info("==========================");
         log.info("==========================");
         int idx = fileName.lastIndexOf("/");
-        String path = fileName.substring(0,idx);
-        String name = fileName.substring(idx+1); //uuid_fileName
-        String uuid = name.substring(0,name.indexOf("_"));
-        log.info(path);
-        log.info(idx);
-        log.info(name);
-        log.info(uuid);
+//        String path = fileName.substring(0,idx);
+//        String name = fileName.substring(idx+1); //uuid_fileName
+//        String uuid = name.substring(0,name.indexOf("_"));
+//        log.info(path);
+//        log.info(name);
+//        log.info(uuid);
 
-        File targetFile = new File("C:\\projectFiles\\image\\" + name);
+        File targetFile = new File("C:\\projectFiles\\image\\" + fileName);
         log.info(targetFile);
         boolean result = targetFile.delete();
 
         //thumbnail
         if(result){
-            File thumbFile = new File("C:\\projectFiles\\image\\s_"+name);
+            File thumbFile = new File("C:\\projectFiles\\image\\s_"+fileName);
             thumbFile.delete();
         }
 
